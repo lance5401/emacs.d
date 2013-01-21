@@ -135,8 +135,8 @@
 ;     (color-theme-initialize)
 ;     (color-theme-hober)))
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/zenburn-emacs/")
+;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;(add-to-list 'custom-theme-load-path "~/.emacs.d/zenburn-emacs/")
 ;(load-theme 'zenburn t)
 ;(load-theme 'wombat t)
 
@@ -150,7 +150,7 @@
 ;(require 'icicles)
 
 ; evil mode
-(add-to-list 'load-path "~/.emacs.d/evil")
+(add-to-list 'load-path "~/.emacs.d/evil-evil")
 (require 'evil)
 (evil-mode 1)
 
@@ -198,6 +198,8 @@
 (setq imenu-max-items 32)
 
 ; auto-complete
+(add-to-list 'load-path "~/.emacs.d/popup-el")
+(add-to-list 'load-path "~/.emacs.d/fuzzy-el")
 (add-to-list 'load-path "~/.emacs.d/auto-complete/")
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/ac-dict")
@@ -270,20 +272,7 @@
 ; nxhtml
 (load "~/.emacs.d/nxhtml/autostart.el")
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("843a82ff3b91bec5430f9acdd11de03fc0f7874b15c1b6fbb965116b4c7bf830" "5d039e03dea6910a87bb3ba507c92f2d30672ef6016e4612f05514bc3cdacc85" "be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
 ;; magit
-(add-to-list 'load-path "~/.emacs.d/magit")
-(require 'magit)
-(require 'magit-svn)
+;(add-to-list 'load-path "~/.emacs.d/magit")
+;(require 'magit)
+;(require 'magit-svn)
