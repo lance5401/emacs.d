@@ -9,7 +9,8 @@
 ;;
 ;; set up unicode
 ;;
-(set-language-environment   'Chinese-GBK)
+;(set-language-environment   'Chinese-GBK)
+(set-language-environment   'English)
 (prefer-coding-system       'utf-8)
 (setq-default default-buffer-file-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -276,3 +277,9 @@
 ;(add-to-list 'load-path "~/.emacs.d/magit")
 ;(require 'magit)
 ;(require 'magit-svn)
+
+;; ibus
+(add-to-list 'load-path "~/.emacs.d/ibus-el")
+(require 'ibus)
+(add-hook 'after-init-hook 'ibus-mode-on)
+(setq ibus-cursor-color '("red" "blue" "limegreen"))
