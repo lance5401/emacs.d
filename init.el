@@ -1,5 +1,8 @@
 (server-start)
 
+; linux: font attributes, 10 points
+(set-face-attribute 'default nil :height 100)
+
 (add-to-list 'load-path "~/.emacs.d")
 
 ; input method
@@ -18,8 +21,8 @@
 (set-keyboard-coding-system 'utf-8)
 ;; From Emacs wiki
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
-; MS Windows clipboard is UTF-16LE
-(set-clipboard-coding-system 'utf-16le-dos)
+; windows: MS Windows clipboard is UTF-16LE
+;(set-clipboard-coding-system 'utf-16le-dos)
 
 ; short yes no
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -278,7 +281,7 @@
 ;(require 'magit)
 ;(require 'magit-svn)
 
-;; ibus
+;; linux: ibus
 (add-to-list 'load-path "~/.emacs.d/ibus-el")
 (require 'ibus)
 (add-hook 'after-init-hook 'ibus-mode-on)
