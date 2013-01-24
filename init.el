@@ -100,6 +100,7 @@
          ("Javascript"  (mode . js-mode))
          ("Python"      (mode . python-mode))
          ("Elisp"       (mode . emacs-lisp-mode))
+         ("XML"         (mode . nxml-mode))
          ("Html"        (or(mode . html-mode)
                            (mode . nxhtml-mode)))
          ("css"         (mode . css-mode))
@@ -121,6 +122,50 @@
 (setq-default tab-width 4)
 (setq-default tab-stop-list (list 4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108))
 (setq-default indent-tabs-mode nil)
+
+;;
+;; cycle through buffers
+;;
+(defun next-user-buffer ()
+  "Switch to the next user buffer.
+User buffers are those whose name does not start with *."
+  (interactive)
+  (next-buffer)
+  (let ((i 0))
+    (while (and (string-match "^*" (buffer-name)) (< i 50))
+      (setq i (1+ i)) (next-buffer) )))
+
+(defun previous-user-buffer ()
+  "Switch to the previous user buffer.
+User buffers are those whose name does not start with *."
+  (interactive)
+  (previous-buffer)
+  (let ((i 0))
+    (while (and (string-match "^*" (buffer-name)) (< i 50))
+      (setq i (1+ i)) (previous-buffer) )))
+
+(defun next-emacs-buffer ()
+  "Switch to the next emacs buffer.
+Emacs buffers are those whose name starts with *."
+  (interactive)
+  (next-buffer)
+  (let ((i 0))
+    (while (and (not (string-match "^*" (buffer-name))) (< i 50))
+      (setq i (1+ i)) (next-buffer) )))
+
+(defun previous-emacs-buffer ()
+  "Switch to the previous emacs buffer.
+Emacs buffers are those whose name starts with *."
+  (interactive)
+  (previous-buffer)
+  (let ((i 0))
+    (while (and (not (string-match "^*" (buffer-name))) (< i 50))
+      (setq i (1+ i)) (previous-buffer) )))
+
+(global-set-key (kbd "<C-prior>")   'previous-user-buffer)   ; Ctrl + PageUp
+(global-set-key (kbd "<C-next>")    'next-user-buffer)       ; Ctrl + PageDown
+(global-set-key (kbd "<C-S-prior>") 'previous-emacs-buffer)  ; Ctrl + PageUp
+(global-set-key (kbd "<C-S-next>")  'next-emacs-buffer)      ; Ctrl + PageDown
 
 ; cua mode
 (cua-mode t)
