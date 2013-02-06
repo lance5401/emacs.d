@@ -14,6 +14,9 @@
 ;;
 ;(set-language-environment   'Chinese-GBK)
 (set-language-environment   'English)
+(prefer-coding-system       'utf-16-le)
+(prefer-coding-system       'cp936)
+(prefer-coding-system       'chinese-iso-8bit-dos)
 (prefer-coding-system       'utf-8)
 (setq-default default-buffer-file-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -23,6 +26,10 @@
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 ; windows: MS Windows clipboard is UTF-16LE
 ;(set-clipboard-coding-system 'utf-16le-dos)
+
+; unicad
+;(add-to-list 'load-path "~/.emacs.d/unicad")
+;(require 'unicad)
 
 ; short yes no
 (defalias 'yes-or-no-p 'y-or-n-p)
