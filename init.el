@@ -208,10 +208,19 @@ Emacs buffers are those whose name starts with *."
 ;(add-to-list 'load-path "~/.emacs.d/icicles")
 ;(require 'icicles)
 
-; evil mode
+;;
+;; evil mode
+;;
 (add-to-list 'load-path "~/.emacs.d/evil-evil")
 (require 'evil)
 (evil-mode 1)
+; set initial state (normal, insert, emacs)
+(loop for (mode . state) in '((gtags-select-mode . emacs)
+                              (shell-mode . emacs)
+                              (eshell-mode . emacs)
+                              (term-mode . emacs))
+      do (evil-set-initial-state mode state))
+
 
 (add-to-list 'load-path "~/.emacs.d/evil-surround")
 (require 'surround)
@@ -364,3 +373,11 @@ Emacs buffers are those whose name starts with *."
 (global-set-key (kbd "C-M-.") 'gtags-find-tag) ;; M-. finds tag
 (global-set-key (kbd "C-M-,") 'gtags-find-symbol) ;; C-M-, find all usages of symbol
 (global-set-key (kbd "C-M->") 'gtags-find-rtag)   ;; C-M-. find all references of tag
+(define-key gtags-select-mode-map (kbd "RET") 'gtags-select-tag) ;; select file with RET
+
+;;
+;; c/c++: quickly switch between header/implemenation file
+;;
+(add-hook 'c-mode-common-hook
+  (lambda()
+    (local-set-key (kbd "C-c o") 'ff-find-other-file)))
