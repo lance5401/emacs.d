@@ -9,6 +9,9 @@
 (global-unset-key (kbd "C-SPC"))
 (global-set-key (kbd "S-SPC") 'set-mark-command)
 
+; mouse
+(mouse-avoidance-mode 'jump)		; jump mouse away when typing
+
 ;;
 ;; set up unicode
 ;;
@@ -338,3 +341,26 @@ Emacs buffers are those whose name starts with *."
 (require 'ibus)
 (add-hook 'after-init-hook 'ibus-mode-on)
 (setq ibus-cursor-color '("red" "blue" "limegreen"))
+
+;;
+;; gtags
+;;
+;(autoload 'gtags-mode "gtags" "" t)
+(require 'gtags)
+
+(defun ww-next-gtag ()
+  "Find next matching tag, for GTAGS."
+  (interactive)
+  (let ((latest-gtags-buffer
+         (car (delq nil  (mapcar (lambda (x) (and (string-match "GTAGS SELECT" (buffer-name x)) (buffer-name x)) )
+                                 (buffer-list)) ))))
+    (cond (latest-gtags-buffer
+           (switch-to-buffer latest-gtags-buffer)
+           (forward-line)
+           (gtags-select-it nil))
+          ) ))
+
+(global-set-key (kbd "M-;") 'ww-next-gtag)   ;; M-; cycles to next result, after doing M-. C-M-. or C-M-,
+(global-set-key (kbd "C-M-.") 'gtags-find-tag) ;; M-. finds tag
+(global-set-key (kbd "C-M-,") 'gtags-find-symbol) ;; C-M-, find all usages of symbol
+(global-set-key (kbd "C-M->") 'gtags-find-rtag)   ;; C-M-. find all references of tag
