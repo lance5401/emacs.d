@@ -98,6 +98,12 @@
 
 (global-set-key "\C-m" 'newline-and-indent)
 
+;; by Ellen Taylor, 2012-07-20
+(defadvice shell (around always-new-shell)
+  "Always start a new shell."
+  (let ((buffer (generate-new-buffer-name "*shell*"))) ad-do-it))
+(ad-activate 'shell)
+
 ;; ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (setq ibuffer-expert t)
