@@ -401,6 +401,10 @@ Emacs buffers are those whose name starts with *."
 ;(global-set-key (kbd "C-M->") 'gtags-find-rtag)   ;; C-M-. find all references of tag
 ;(define-key gtags-select-mode-map (kbd "RET") 'gtags-select-tag) ;; select file with RET
 
+; xcscope
+(add-to-list 'load-path "~/.emacs.d/xcscope")
+(require 'xcscope)
+
 ;;
 ;; c/c++: quickly switch between header/implemenation file
 ;;
