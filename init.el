@@ -3,6 +3,19 @@
 ; linux: font attributes, 10 points
 (set-face-attribute 'default nil :height 100)
 
+
+; don't show line continuation indicator
+(setq-default fringe-indicator-alist '((truncation left-arrow right-arrow)
+ ;(continuation left-curly-arrow right-curly-arrow)
+ (overlay-arrow . right-triangle)
+ (up . up-arrow)
+ (down . down-arrow)
+ (top top-left-angle top-right-angle)
+ (bottom bottom-left-angle bottom-right-angle top-right-angle top-left-angle)
+ (top-bottom left-bracket right-bracket top-right-angle top-left-angle)
+ (empty-line . empty-line)
+ (unknown . question-mark)))
+
 (add-to-list 'load-path "~/.emacs.d")
 
 ; input method
@@ -211,8 +224,8 @@ Emacs buffers are those whose name starts with *."
 (autopair-global-mode) ;; enable autopair in all buffers
 
 ; icicles
-;(add-to-list 'load-path "~/.emacs.d/icicles")
-;(require 'icicles)
+(add-to-list 'load-path "~/.emacs.d/icicles")
+(require 'icicles)
 
 ;;
 ;; evil mode
@@ -222,6 +235,7 @@ Emacs buffers are those whose name starts with *."
 (evil-mode 1)
 ; set initial state (normal, insert, emacs)
 (loop for (mode . state) in '((gtags-select-mode . emacs)
+                              (etags-select-mode . normal)
                               (shell-mode . emacs)
                               (eshell-mode . emacs)
                               (term-mode . emacs))
@@ -357,29 +371,35 @@ Emacs buffers are those whose name starts with *."
 (add-hook 'after-init-hook 'ibus-mode-on)
 (setq ibus-cursor-color '("red" "blue" "limegreen"))
 
+; etags select
+(add-to-list 'load-path "~/.emacs.d/etags-select")
+(require 'etags-select)
+(global-set-key (kbd "C-M-.") 'etags-select-find-tag-at-point)
+(global-set-key (kbd "C-M-,") 'etags-select-find-tag)
+
 ;;
 ;; gtags
 ;;
 ;(autoload 'gtags-mode "gtags" "" t)
-(require 'gtags)
+;(require 'gtags)
 
-(defun ww-next-gtag ()
-  "Find next matching tag, for GTAGS."
-  (interactive)
-  (let ((latest-gtags-buffer
-         (car (delq nil  (mapcar (lambda (x) (and (string-match "GTAGS SELECT" (buffer-name x)) (buffer-name x)) )
-                                 (buffer-list)) ))))
-    (cond (latest-gtags-buffer
-           (switch-to-buffer latest-gtags-buffer)
-           (forward-line)
-           (gtags-select-it nil))
-          ) ))
+;(defun ww-next-gtag ()
+;  "Find next matching tag, for GTAGS."
+;  (interactive)
+;  (let ((latest-gtags-buffer
+;         (car (delq nil  (mapcar (lambda (x) (and (string-match "GTAGS SELECT" (buffer-name x)) (buffer-name x)) )
+;                                 (buffer-list)) ))))
+;    (cond (latest-gtags-buffer
+;           (switch-to-buffer latest-gtags-buffer)
+;           (forward-line)
+;           (gtags-select-it nil))
+;          ) ))
 
-(global-set-key (kbd "M-;") 'ww-next-gtag)   ;; M-; cycles to next result, after doing M-. C-M-. or C-M-,
-(global-set-key (kbd "C-M-.") 'gtags-find-tag) ;; M-. finds tag
-(global-set-key (kbd "C-M-,") 'gtags-find-symbol) ;; C-M-, find all usages of symbol
-(global-set-key (kbd "C-M->") 'gtags-find-rtag)   ;; C-M-. find all references of tag
-(define-key gtags-select-mode-map (kbd "RET") 'gtags-select-tag) ;; select file with RET
+;(global-set-key (kbd "M-;") 'ww-next-gtag)   ;; M-; cycles to next result, after doing M-. C-M-. or C-M-,
+;(global-set-key (kbd "C-M-.") 'gtags-find-tag) ;; M-. finds tag
+;(global-set-key (kbd "C-M-,") 'gtags-find-symbol) ;; C-M-, find all usages of symbol
+;(global-set-key (kbd "C-M->") 'gtags-find-rtag)   ;; C-M-. find all references of tag
+;(define-key gtags-select-mode-map (kbd "RET") 'gtags-select-tag) ;; select file with RET
 
 ;;
 ;; c/c++: quickly switch between header/implemenation file
