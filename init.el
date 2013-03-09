@@ -371,11 +371,16 @@ Emacs buffers are those whose name starts with *."
 (add-hook 'after-init-hook 'ibus-mode-on)
 (setq ibus-cursor-color '("red" "blue" "limegreen"))
 
-; etags select
+; etags-select
 (add-to-list 'load-path "~/.emacs.d/etags-select")
 (require 'etags-select)
 (global-set-key (kbd "C-M-.") 'etags-select-find-tag-at-point)
 (global-set-key (kbd "C-M-,") 'etags-select-find-tag)
+
+; etags-table
+(add-to-list 'load-path "~/.emacs.d/etags-table")
+(require 'etags-table)
+(setq etags-table-search-up-depth 10)
 
 ;;
 ;; gtags
