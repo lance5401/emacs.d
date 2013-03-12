@@ -227,10 +227,15 @@ Emacs buffers are those whose name starts with *."
 (add-to-list 'load-path "~/.emacs.d/icicles")
 (require 'icicles)
 
+;; undo-tree
+(add-to-list 'load-path "~/.emacs.d/undo-tree")
+(require 'undo-tree)
+(global-undo-tree-mode)
+
 ;;
 ;; evil mode
 ;;
-(add-to-list 'load-path "~/.emacs.d/evil-evil")
+(add-to-list 'load-path "~/.emacs.d/evil")
 (require 'evil)
 (evil-mode 1)
 ; set initial state (normal, insert, emacs)
@@ -245,6 +250,13 @@ Emacs buffers are those whose name starts with *."
 (add-to-list 'load-path "~/.emacs.d/evil-surround")
 (require 'surround)
 (global-surround-mode 1)
+
+(add-to-list 'load-path "~/.emacs.d/evil-plugins")
+(require 'evil-little-word)
+;(require 'evil-mode-line)
+;(require 'evil-operator-comment')
+;(global-evil-operator-comment-mode 1)
+
 
 ;; recentf stuff
 (require 'recentf)
@@ -296,6 +308,7 @@ Emacs buffers are those whose name starts with *."
 (define-key ac-completing-map [return] 'ac-complete) ; work with autopair
 
 ;; sr-speedbar
+(add-to-list 'load-path "~/.emacs.d/sr-speedbar")
 (require 'sr-speedbar)
 (global-set-key (kbd "<f9>") 'sr-speedbar-toggle)
 (setq sr-speedbar-width 30)
@@ -311,6 +324,7 @@ Emacs buffers are those whose name starts with *."
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
 ;; dired
+(add-to-list 'load-path "~/.emacs.d/dired-plus")
 (require 'dired+)
 (toggle-diredp-find-file-reuse-dir 1)
 ; list directories before files in dired
@@ -366,7 +380,7 @@ Emacs buffers are those whose name starts with *."
 ;(require 'magit-svn)
 
 ;; linux: ibus
-(add-to-list 'load-path "~/.emacs.d/ibus-el")
+(add-to-list 'load-path "~/.emacs.d/ibus")
 (require 'ibus)
 (add-hook 'after-init-hook 'ibus-mode-on)
 (setq ibus-cursor-color '("red" "blue" "limegreen"))
