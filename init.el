@@ -433,12 +433,16 @@ Emacs buffers are those whose name starts with *."
   (lambda()
     (local-set-key (kbd "C-c o") 'ff-find-other-file)))
 
+(setq c-default-style '((java-mode . "java")
+                        (awk-mode . "awk")
+                        (other . "linux")))
+
 ;; tabs and styles
 (defun my-c-mode-hook ()
   (setq-default tab-width 4)
   (setq-default tab-stop-list (list 4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108))
-  (setq-default indent-tabs-mode t)
-  (setq c-default-style "linux")
+  (setq-default indent-tabs-mode nil)
+  (setq-default c-indentation-style "linux")
   (setq c-basic-offset 4))
 (add-hook 'c-mode-hook 'my-c-mode-hook)
 (add-hook 'c++-mode-hook 'my-c-mode-hook)
