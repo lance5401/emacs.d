@@ -1,3 +1,15 @@
+;
+; windows: set HOME
+;
+; in C:\Users\Administrator\AppData\Roaming:
+;   (load-file "d:/soft/emacs/.emacs.d/emacs.d/init.el")
+;
+(setenv "HOME" "d:/soft/emacs")
+;(setenv "PATH" "E:/water")
+;;set the default file path
+;(setq default-directory "~/")
+;(add-to-list 'load-path "~/emacs/site-lisp")
+
 (server-start)
 
 ; linux: font attributes, 10 points
